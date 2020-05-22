@@ -16,8 +16,7 @@ function estb_init(estb_max, estb_prev, prov) {
     else {
         var loop_cnt = estb_max;
     }
-    for (var i = 0; i < loop_cnt; i++) {
-        var wk_cnt = i + 1;
+    for (var wk_cnt = 1; wk_cnt <= loop_cnt; wk_cnt++) {
         var data_wrk = $(data).clone().attr('id', wk_cnt + "-estb_view");
         append_quest(wk_cnt, data_wrk);
         if (prov !== "no") {

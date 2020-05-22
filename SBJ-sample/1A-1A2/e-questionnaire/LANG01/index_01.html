@@ -27,6 +27,9 @@
   <script src="./js/VSIC_code.js"></script>
   <script>
     var questinnaire_id = "1A-1";
+    var F1A_otherDsp_cnt = 0;
+    var F1A_otherDsp_max = 7;
+
     function F1A_3_Eco_act(id) {
       document.getElementById("F1A_3_Eco_act_03").style.display = "none";
       document.getElementById("F1A_3_Eco_act_08").style.display = "none";
@@ -36,7 +39,7 @@
           enable_id = "F1A_3_Eco_act_" + id;
           document.getElementById(enable_id).style.display = "block";
           document.getElementsByName("F1A_3_Eco_Owner_08_01")[0].value = "";
-          for (let i=0; i < document.getElementsByName("F1A_3_Eco_Owner_10_01").length; i++) {
+          for (let i = 0; i < document.getElementsByName("F1A_3_Eco_Owner_10_01").length; i++) {
             document.getElementsByName("F1A_3_Eco_Owner_10_01")[i].checked = false;
           }
           document.getElementsByName("F1A_3_Eco_Owner_10_02")[0].value = "";
@@ -46,7 +49,7 @@
           document.getElementById(enable_id).style.display = "block";
           document.getElementsByName("F1A_3_Eco_Owner_03_01")[0].value = "";
           document.getElementsByName("F1A_3_Eco_Owner_03_02")[0].value = "";
-          for (let i=0; i < document.getElementsByName("F1A_3_Eco_Owner_10_01").length; i++) {
+          for (let i = 0; i < document.getElementsByName("F1A_3_Eco_Owner_10_01").length; i++) {
             document.getElementsByName("F1A_3_Eco_Owner_10_01")[i].checked = false;
           }
           document.getElementsByName("F1A_3_Eco_Owner_10_02")[0].value = "";
@@ -62,12 +65,73 @@
           document.getElementsByName("F1A_3_Eco_Owner_03_01")[0].value = "";
           document.getElementsByName("F1A_3_Eco_Owner_03_02")[0].value = "";
           document.getElementsByName("F1A_3_Eco_Owner_08_01")[0].value = "";
-          for (let i=0; i < document.getElementsByName("F1A_3_Eco_Owner_10_01").length; i++) {
+          for (let i = 0; i < document.getElementsByName("F1A_3_Eco_Owner_10_01").length; i++) {
             document.getElementsByName("F1A_3_Eco_Owner_10_01")[i].checked = false;
           }
           document.getElementsByName("F1A_3_Eco_Owner_10_02")[0].value = "";
 
       }
+    }
+
+    function F1A_otherDsp_add() {
+      F1A_otherDsp_cnt = F1A_otherDsp_cnt + 1;
+      $("#F1A_otherDspDel_lnk").css("display", "block");
+      $("#F1A_4-otherDsp_" + F1A_otherDsp_cnt).css("display", "block");
+      $("#F1A_7-otherDsp_" + F1A_otherDsp_cnt).css("display", "table-row");
+      $("#F1A_10-otherDsp_" + F1A_otherDsp_cnt).css("display", "table-row");
+      if (F1A_otherDsp_cnt == F1A_otherDsp_max) {
+        $("#F1A_otherDsp_lnk").css("display", "none");
+      }
+    }
+
+    function F1A_otherDsp_del() {
+      $("#F1A_4-otherDsp_" + F1A_otherDsp_cnt).css("display", "none");
+      $("#F1A_7-otherDsp_" + F1A_otherDsp_cnt).css("display", "none");
+      $("#F1A_10-otherDsp_" + F1A_otherDsp_cnt).css("display", "none");
+      $("#F1A_4-otherProd_" + F1A_otherDsp_cnt).val("");
+      $("#F1A_4-otherProdCd_" + F1A_otherDsp_cnt).val("");
+      $("#F1A_7-otherProd_" + F1A_otherDsp_cnt).text("");
+      $("#F1A_7-otherProdCd_" + F1A_otherDsp_cnt).text("");
+      $("#F1A_7_3_othAct_total_" + F1A_otherDsp_cnt).val("");
+      $("#F1A_10-otherProd_" + F1A_otherDsp_cnt).text("");
+      $("#F1A_10-otherProdCd_" + F1A_otherDsp_cnt).text("");
+      $("#F1A_10_Results_othAct_" + F1A_otherDsp_cnt).val("");
+      F1A_otherDsp_cnt = F1A_otherDsp_cnt - 1;
+      if (F1A_otherDsp_cnt == 0) {
+        $("#F1A_otherDspDel_lnk").css("display", "none");
+      }
+      if (F1A_otherDsp_cnt < F1A_otherDsp_max) {
+        $("#F1A_otherDsp_lnk").css("display", "block");
+      }
+    }
+
+    function F1A_otherDsp_Upd() {
+      let wk_disp_flg = false;
+      for (let i = F1A_otherDsp_max; i >= 1; i--) {
+        let wk_othProd = strdata_array["F1A_4_OtherProdcut_" + i];
+        let wk_othProdCd = strdata_array["F1A_4_OtherProdcutCd_" + i];
+        if (wk_othProd || wk_othProdCd) {
+          $("#F1A_otherDspDel_lnk").css("display", "block");
+          F1A_otherDsp_cnt = i;
+          wk_disp_flg = true;
+        }
+         if (wk_disp_flg){ 
+          $("#F1A_4-otherDsp_" + i).css("display", "block");
+          $("#F1A_7-otherDsp_" + i).css("display", "table-row");
+          $("#F1A_10-otherDsp_" + i).css("display", "table-row");
+        }
+      }
+      if (F1A_otherDsp_cnt == F1A_otherDsp_max) {
+            $("#F1A_otherDsp_lnk").css("display", "none");
+          }
+    }
+
+    function F1A_Prod_Copy(prod_id) {
+      var cp_prod_val = $("#" + prod_id).val();
+      var wk_prod = prod_id.split('-');
+      var cp_prod = wk_prod.slice(-1)[0];
+      $("#F1A_7-" + cp_prod).text(cp_prod_val);
+      $("#F1A_10-" + cp_prod).text(cp_prod_val);
     }
   </script>
 </head>
@@ -259,7 +323,7 @@
           <label for="4640" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Email</span><span
               class="icons"> </span></label>
           <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4640" name="F1A_2_Email" class="form-control tokei-textbox-item w650" placeholder=""
+            <input type="email" id="4640" name="F1A_2_Email" class="form-control tokei-textbox-item w650" placeholder=""
               style="font-size:12px; text-align:left">
           </div>
         </div>
@@ -268,9 +332,9 @@
               &zwnj;</span></span>
         </div>
         <div class="form-group form-inline tokei-table-tr clearfix">
-          <label class="control-label col-sm-2 tokei-table-th" ><span class="txt-label">Economic ownership</span><span
+          <label class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Economic ownership</span><span
               class="icons"> <span class="required-label">required</span></span></label>
-          <div id="4645-div" class="col-sm-10 tokei-table-td" >
+          <div id="4645-div" class="col-sm-10 tokei-table-td">
             <label><INPUT type="radio" id="4645" name="F1A_3_Eco_Owner" value="01" onclick="F1A_3_Eco_act('none')"><span
                 style="font-size:14px;"> 01. One-member Ltd Co with 100% central state capital</span>&nbsp; </label><br>
             <label><INPUT type="radio" id="4645-2" name="F1A_3_Eco_Owner" value="02"
@@ -349,7 +413,7 @@
             <span class="txt-label">10 Joint stock Co. with state capital ≤ 50%</span>
             <span class="icons"> </span></label>
           <div class="col-sm-10 tokei-table-td">
-            <P>
+            <P id="4688-0">
               controlled by state:&nbsp;<label><INPUT type="radio" id="4688-1" name="F1A_3_Eco_Owner_10_01"
                   value="1"><span style="font-size:12px;">Yes</span>&nbsp;&nbsp; </label>
               <label><INPUT type="radio" id="4688-2" name="F1A_3_Eco_Owner_10_01" value="2"><span
@@ -370,22 +434,24 @@
             <span style="font-size:18px;">4.1. Key business production activity&zwnj;</span></span>
         </div>
         <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4690" class="control-label col-sm-2 tokei-table-th">
+          <label for="F1A_4-KeyProd" class="control-label col-sm-2 tokei-table-th">
             <span class="txt-label">Activity</span><span class="icons">
               <span class="required-label">required</span></span></label>
           <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4690" name="F1A_4_KeyProdcut" class="form-control tokei-textbox-item w680"
-              placeholder="" style="font-size:12px; text-align:left">
+            <input type="text" id="F1A_4-KeyProd" name="F1A_4_KeyProdcut" class="form-control tokei-textbox-item w680"
+              placeholder="" style="font-size:12px; text-align:left" onchange="F1A_Prod_Copy(id)">
           </div>
         </div>
         <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4691" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Code</span><span
-              class="icons"> </span></label>
+          <label for="F1A_4-KeyProdCd" class="control-label col-sm-2 tokei-table-th"><span
+              class="txt-label">Code</span><span class="icons">
+              <span class="required-label">required</span></span></label>
           <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4691" name="F1A_4_KeyProdcutCode" class="form-control tokei-textbox-item w80"
-              placeholder="" style="font-size:12px; text-align:left">
-            <button id="vsic_btn0" type="button" class="btn btn-warning tokei-btn-command vsic-btn" tag_id="4691"
-              onclick="VSIC_open(id)">VSIC Select!</button>
+            <input type="text" id="F1A_4-KeyProdCd" name="F1A_4_KeyProdcutCode" readonly
+              class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+              onchange="F1A_Prod_Copy(id)">
+            <button id="vsic_btn0" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+              tag_id="F1A_4-KeyProdCd" onclick="VSIC_open(id)">VSIC Select!</button>
           </div>
         </div>
         <div class="form-group form-inline" style="text-align:left;">
@@ -397,88 +463,179 @@
           <span class="box-commentary"><span style="font-size:18px;">4.2 Other business production activities (write
               other activities, excluding key activity)&zwnj;</span></span>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4696" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Activity</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4696" name="F1A_4_OtherProdcut1" class="form-control tokei-textbox-item w680"
-              placeholder="" style="font-size:12px; text-align:left">
+        <div id="F1A_4-otherDsp_1" style="display: none">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_1" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 1</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_1" name="F1A_4_OtherProdcut_1"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_1" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_1" name="F1A_4_OtherProdcutCd_1" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn1" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_1" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4697" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Code</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4697" name="F1A_4_OtherProdcut1_Code" class="form-control tokei-textbox-item w80"
-              placeholder="" style="font-size:12px; text-align:left">
-            <button id="vsic_btn1" type="button" class="btn btn-warning tokei-btn-command vsic-btn" tag_id="4697"
-              onclick="VSIC_open(id)">VSIC Select!</button>
+        <div id="F1A_4-otherDsp_2" style="display: none;">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_2" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 2</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_2" name="F1A_4_OtherProdcut_2"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_2" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_2" name="F1A_4_OtherProdcutCd_2" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn2" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_2" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4698" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Activity</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4698" name="F1A_4_OtherProdcut2" class="form-control tokei-textbox-item w680"
-              placeholder="" style="font-size:12px; text-align:left">
+        <div id="F1A_4-otherDsp_3" style="display: none;">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_3" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 3</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_3" name="F1A_4_OtherProdcut_3"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_3" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_3" name="F1A_4_OtherProdcutCd_3" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn3" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_3" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4699" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Code</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4699" name="F1A_4_OtherProdcut2_Code" class="form-control tokei-textbox-item w80"
-              placeholder="" style="font-size:12px; text-align:left">
-            <button id="vsic_btn2" type="button" class="btn btn-warning tokei-btn-command vsic-btn" tag_id="4699"
-              onclick="VSIC_open(id)">VSIC Select!</button>
+        <div id="F1A_4-otherDsp_4" style="display: none;">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_4" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 4</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_4" name="F1A_4_OtherProdcut_4"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_4" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_4" name="F1A_4_OtherProdcutCd_4" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn4" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_4" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4700" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Activity</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4700" name="F1A_4_OtherProdcut3" class="form-control tokei-textbox-item w680"
-              placeholder="" style="font-size:12px; text-align:left">
+        <div id="F1A_4-otherDsp_5" style="display: none;">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_5" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 5</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_5" name="F1A_4_OtherProdcut_5"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_5" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_5" name="F1A_4_OtherProdcutCd_5" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn5" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_5" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4701" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Code</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4701" name="F1A_4_OtherProdcut3_Code" class="form-control tokei-textbox-item w80"
-              placeholder="" style="font-size:12px; text-align:left">
-            <button id="vsic_btn3" type="button" class="btn btn-warning tokei-btn-command vsic-btn" tag_id="4701"
-              onclick="VSIC_open(id)">VSIC Select!</button>
+        <div id="F1A_4-otherDsp_6" style="display: none;">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_6" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 6</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_6" name="F1A_4_OtherProdcut_6"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_6" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_6" name="F1A_4_OtherProdcutCd_6" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn6" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_6" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4702" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Activity</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4702" name="F1A_4_OtherProdcut4" class="form-control tokei-textbox-item w680"
-              placeholder="" style="font-size:12px; text-align:left">
+        <div id="F1A_4-otherDsp_7" style="display: none;">
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProd_7" class="control-label col-sm-2 tokei-table-th">
+              <span class="txt-label">Other activity 7</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProd_7" name="F1A_4_OtherProdcut_7"
+                class="form-control tokei-textbox-item w680" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+            </div>
+          </div>
+          <div class="form-group form-inline tokei-table-tr clearfix">
+            <label for="F1A_4-otherProdCd_7" class="control-label col-sm-2 tokei-table-th"><span
+                class="txt-label">Code</span><span class="icons"> </span></label>
+            <div class="col-sm-10 tokei-table-td">
+              <input type="text" id="F1A_4-otherProdCd_7" name="F1A_4_OtherProdcutCd_7" readonly
+                class="form-control tokei-textbox-item w80" placeholder="" style="font-size:12px; text-align:left"
+                onchange="F1A_Prod_Copy(id)">
+              <button id="vsic_btn7" type="button" class="btn btn-warning tokei-btn-command vsic-btn"
+                tag_id="F1A_4-otherProdCd_7" onclick="VSIC_open(id)">VSIC Select!</button>
+            </div>
           </div>
         </div>
-        <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4703" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Code</span><span
-              class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td">
-            <input type="text" id="4703" name="F1A_4_OtherProdcut4_Code" class="form-control tokei-textbox-item w80"
-              placeholder="" style="font-size:12px; text-align:left">
-            <button id="vsic_btn4" type="button" class="btn btn-warning tokei-btn-command vsic-btn" tag_id="4703"
-              onclick="VSIC_open(id)">VSIC Select!</button>
-          </div>
-        </div>
+        <span class="box-commentary" style="text-align: left">
+          <a id="F1A_otherDsp_lnk" href="javascript:void(0)" style="font-size: 16px; color: blue"
+            onclick="F1A_otherDsp_add()">
+            + Add more activities</a>
+          <a id="F1A_otherDspDel_lnk" href="javascript:void(0)" style="font-size: 16px; color: red; display: none;"
+            onclick="F1A_otherDsp_del()">
+            - Delete activities</a>
+        </span>
         <div class="form-group form-inline" style="text-align:left;">
-          <span class="box-commentary"><span style="font-size:20px;">5. Did enterprise buy/sell merchandise and services
+          <span class="box-commentary"><span style="font-size:20px;">5. Did enterprise buy/sell merchandise and
+              services
               with foreign partners in 2019?&zwnj;</span></span>
         </div>
         <div class="form-group form-inline tokei-table-tr clearfix">
           <label class="control-label col-sm-2 tokei-table-th"><span class="txt-label">Yes or No</span><span
               class="icons"> </span></label>
-          <div class="col-sm-10 tokei-table-td"><INPUT type="radio" id="4705" name="F1A_5_Buy" value="1"><span
-              style="font-size:12px;">Yes</span>&nbsp; <INPUT type="radio" id="4705-2" name="F1A_5_Buy" value="2"><span
-              style="font-size:12px;">No</span>&nbsp; </div>
+          <div id="4705-0" class="col-sm-10 tokei-table-td"><INPUT type="radio" id="4705" name="F1A_5_Buy"
+              value="1"><span style="font-size:12px;">Yes</span>&nbsp; <INPUT type="radio" id="4705-2" name="F1A_5_Buy"
+              value="2"><span style="font-size:12px;">No</span>&nbsp; </div>
         </div>
         <div class="form-group form-inline" style="text-align:left;">
           <span class="box-commentary"><span style="font-size:20px;">6. Total money that enterprise received from/paid
@@ -504,7 +661,8 @@
           <span class="box-commentary"><span style="font-size:20px;">7. Labour in 2019&zwnj;</span></span>
         </div>
         <div class="form-group form-inline tokei-table-tr clearfix">
-          <label for="4711" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">7.1 Average labour in
+          <label for="4711" class="control-label col-sm-2 tokei-table-th"><span class="txt-label">7.1 Average labour
+              in
               2019</span><span class="icons"> </span></label>
           <div class="col-sm-10 tokei-table-td">
             <input type="number" id="4711" name="F1A_7_Labour_1" class="form-control tokei-textbox-item numberonly w150"
@@ -545,111 +703,132 @@
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>Total</label></td>
                 <td><input type="number" id="5557" name="F1A_7_3_Total_1"
-                    class="form-control tokei-textbox-item numberonly sumUp-5557" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>Female labour</label></td>
                 <td><input type="number" id="5558" name="F1A_7_3_Total_2"
-                    class="form-control tokei-textbox-item numberonly sumUp-5557" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>Number of employees having social insurance</label></td>
                 <td><input type="number" id="5559" name="F1A_7_3_Total_3"
-                    class="form-control tokei-textbox-item numberonly sumUp-5557" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>Number of self-employees</label></td>
                 <td><input type="number" id="5560" name="F1A_7_3_Total_4"
-                    class="form-control tokei-textbox-item numberonly sumUp-5557" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>Number of foreign employees</label></td>
                 <td><input type="number" id="5561" name="F1A_7_3_Total_5"
-                    class="form-control tokei-textbox-item numberonly sumUp-5557" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="section tokei-section">
 
-          <table class="table table-striped table-hover footable tokei-table-list footable-loaded">
+          <table class="table table-striped table-hover footable tokei-table-list footable-loaded tokei-table-fixed"
+            style="width: 940px;">
             <caption><span class="grid-txt-label">By business production activity (VSIC 2018- 5 digits)</span><span
                 class="icons"></span></caption>
             <thead>
               <tr>
-                <th></th>
-                <th>Business production activity</th>
-                <th>Code(VISIC)</th>
-                <th>Person</th>
+                <th style="width: 150px;"></th>
+                <th style="width: 500px;">Business production activity</th>
+                <th style="width: 90px;">Code(VISIC)</th>
+                <th style="width: 130px;">Person</th>
               </tr>
             </thead>
             <tbody>
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>Key business production activity</label></td>
-                <td>
-                  <input type="text" id="5619" name="F1A_7_3_Activity_1" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5620" name="F1A_7_3_Activity_Code_1" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5621" name="F1A_7_3_Activity_total_1"
-                    class="form-control tokei-textbox-item numberonly sumUp-5619" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_7-KeyProd">
+                </td>
+                <td id="F1A_7-KeyProdCd">
+                </td>
+                <td><input type="number" id="F1A_7_3_keyActivity_total_1" name="F1A_7_3_keyActivity_total_1"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_7-otherDsp_1" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>Other activities 1</label></td>
-                <td>
-                  <input type="text" id="5622" name="F1A_7_3_Activity_2" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5623" name="F1A_7_3_Activity_Code_2" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5624" name="F1A_7_3_Activity_total_2"
-                    class="form-control tokei-textbox-item numberonly sumUp-5619" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_7-otherProd_1">
+                </td>
+                <td id="F1A_7-otherProdCd_1">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_1" name="F1A_7_3_othAct_total_1"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_7-otherDsp_2" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>Other activities 2</label></td>
-                <td>
-                  <input type="text" id="5625" name="F1A_7_3_Activity_3" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5626" name="F1A_7_3_Activity_Code_3" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5627" name="F1A_7_3_Activity_total_3"
-                    class="form-control tokei-textbox-item numberonly sumUp-5619" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_7-otherProd_2">
+                </td>
+                <td id="F1A_7-otherProdCd_2">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_2" name="F1A_7_3_othAct_total_2"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_7-otherDsp_3" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>Other activities 3</label></td>
-                <td>
-                  <input type="text" id="5628" name="F1A_7_3_Activity_4" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5629" name="F1A_7_3_Activity_Code_4" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5630" name="F1A_7_3_Activity_total_4"
-                    class="form-control tokei-textbox-item numberonly sumUp-5619" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_7-otherProd_3">
+                </td>
+                <td id="F1A_7-otherProdCd_3">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_3" name="F1A_7_3_othAct_total_3"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_7-otherDsp_4" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>Other activities 4</label></td>
-                <td>
-                  <input type="text" id="5631" name="F1A_7_3_Activity_5" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5632" name="F1A_7_3_Activity_Code_5" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5633" name="F1A_7_3_Activity_total_5"
-                    class="form-control tokei-textbox-item numberonly sumUp-5619" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
-
-
+                <td id="F1A_7-otherProd_4">
+                </td>
+                <td id="F1A_7-otherProdCd_4">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_4" name="F1A_7_3_othAct_total_4"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
+              </tr>
+              <tr id="F1A_7-otherDsp_5" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>Other activities 5</label></td>
+                <td id="F1A_7-otherProd_5">
+                </td>
+                <td id="F1A_7-otherProdCd_5">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_5" name="F1A_7_3_othAct_total_5"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
+              </tr>
+              <tr id="F1A_7-otherDsp_6" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>Other activities 6</label></td>
+                <td id="F1A_7-otherProd_6">
+                  <input type="text" id="F1A_7-otherProd_6" name="F1A_4_OtherProdcut_6"
+                    class="form-control tokei-textbox-item" placeholder="" readonly="readonly" style="font-size:12px;">
+                </td>
+                <td id="F1A_7-otherProdCd_6">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_6" name="F1A_7_3_othAct_total_6"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
+              </tr>
+              <tr id="F1A_7-otherDsp_7" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>Other activities 7</label></td>
+                <td id="F1A_7-otherProd_7">
+                </td>
+                <td id="F1A_7-otherProdCd_7">
+                </td>
+                <td><input type="number" id="F1A_7_3_othAct_total_7" name="F1A_7_3_othAct_total_7"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
             </tbody>
           </table>
@@ -670,7 +849,8 @@
             </thead>
             <tbody>
               <tr style="text-align:left">
-                <td class="tokei-table-col-head"><label>8.1 Total payables to employees (Refer to TK 334 and TK 353 for
+                <td class="tokei-table-col-head"><label>8.1 Total payables to employees (Refer to TK 334 and TK 353
+                    for
                     data) </label></td>
                 <td><input type="number" id="5564" name="F1A_8_employees_1"
                     class="form-control tokei-textbox-item numberonly sumUp-5564" placeholder="" min="0"
@@ -736,7 +916,8 @@
                     max="9999999999" step="1" style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
-                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finished goods</label></td>
+                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finished goods</label>
+                </td>
                 <td><input type="number" id="5596" name="F1A_9_Inventories_1_4"
                     class="form-control tokei-textbox-item numberonly sumUp-5590" placeholder="" min="0"
                     max="9999999999" step="1" style="font-size:12px;"></td>
@@ -745,7 +926,8 @@
                     max="9999999999" step="1" style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
-                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goods on consignment</label>
+                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goods on
+                    consignment</label>
                 </td>
                 <td><input type="number" id="5598" name="F1A_9_Inventories_1_5"
                     class="form-control tokei-textbox-item numberonly sumUp-5590" placeholder="" min="0"
@@ -765,14 +947,15 @@
         </div>
         <div class="section tokei-section">
 
-          <table class="table table-striped table-hover footable tokei-table-list footable-loaded">
+          <table class="table table-striped table-hover footable tokei-table-list footable-loaded tokei-table-fixed"
+            style="width: 940px;">
             <caption><span class="grid-txt-label">&nbsp;</span><span class="icons"></span></caption>
             <thead>
               <tr>
-                <th></th>
-                <th>Business production activity</th>
-                <th>Code(VISIC)</th>
-                <th>Realized in 2019 (Unit: Mill. VND)</th>
+                <th style="width: 180px;"></th>
+                <th style="width: 500px;">Business production activity</th>
+                <th style="width: 90px;">Code(VISIC)</th>
+                <th style="width: 130px;">Realized in 2019 (Unit: Mill. VND)</th>
               </tr>
             </thead>
             <tbody>
@@ -780,74 +963,92 @@
                 <td class="tokei-table-col-head"><label>Total net turnover from goods sale and services supply</label>
                 </td>
                 <td>
-                  <input type="text" id="5601" name="F1A_10_Activities_1" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
+                </td>
                 <td>
-                  <input type="text" id="5602" name="F1A_10_Activities_Code_1" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5603" name="F1A_10_Results_Num_1"
-                    class="form-control tokei-textbox-item numberonly sumUp-5601" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                </td>
+                <td><input type="number" id="F1A_10_Results_Total" name="F1A_10_Results_Total"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
               <tr style="text-align:left">
                 <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Key activity</label></td>
-                <td>
-                  <input type="text" id="5604" name="F1A_10_Activities_2" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5605" name="F1A_10_Activities_Code_2" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5606" name="F1A_10_Results_Num_2"
-                    class="form-control tokei-textbox-item numberonly sumUp-5601" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_10-KeyProd">
+                </td>
+                <td id="F1A_10-KeyProdCd">
+                </td>
+                <td><input type="number" id="F1A_10_Results_KeyAct" name="F1A_10_Results_KeyAct"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_10-otherDsp_1" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 1</label></td>
-                <td>
-                  <input type="text" id="5607" name="F1A_10_Activities_3" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5608" name="F1A_10_Activities_Code_3" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5609" name="F1A_10_Results_Num_3"
-                    class="form-control tokei-textbox-item numberonly sumUp-5601" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_10-otherProd_1">
+                </td>
+                <td id="F1A_10-otherProdCd_1">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_1" name="F1A_10_Results_othAct_1"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_10-otherDsp_2" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 2</label></td>
-                <td>
-                  <input type="text" id="5610" name="F1A_10_Activities_4" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5611" name="F1A_10_Activities_Code_4" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5612" name="F1A_10_Results_Num_4"
-                    class="form-control tokei-textbox-item numberonly sumUp-5601" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_10-otherProd_2">
+                </td>
+                <td id="F1A_10-otherProdCd_2">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_2" name="F1A_10_Results_othAct_2"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
+              <tr id="F1A_10-otherDsp_3" style="text-align:left; display:none">
                 <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 3</label></td>
-                <td>
-                  <input type="text" id="5613" name="F1A_10_Activities_5" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5614" name="F1A_10_Activities_Code_5" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5615" name="F1A_10_Results_Num_5"
-                    class="form-control tokei-textbox-item numberonly sumUp-5601" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+                <td id="F1A_10-otherProd_3">
+                </td>
+                <td id="F1A_10-otherProdCd_3">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_3" name="F1A_10_Results_othAct_3"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
-              <tr style="text-align:left">
-                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 3</label></td>
-                <td>
-                  <input type="text" id="5616" name="F1A_10_Activities_6" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td>
-                  <input type="text" id="5617" name="F1A_10_Activities_Code_6" class="form-control tokei-textbox-item"
-                    placeholder="" readonly="readonly" style="font-size:12px;"></td>
-                <td><input type="number" id="5618" name="F1A_10_Results_Num_6"
-                    class="form-control tokei-textbox-item numberonly sumUp-5601" placeholder="" min="0"
-                    max="9999999999" step="1" style="font-size:12px;"></td>
+              <tr id="F1A_10-otherDsp_4" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 4</label></td>
+                <td id="F1A_10-otherProd_4">
+                </td>
+                <td id="F1A_10-otherProdCd_4">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_4" name="F1A_10_Results_othAct_4"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
+              </tr>
+              <tr id="F1A_10-otherDsp_5" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 5</label></td>
+                <td id="F1A_10-otherProd_5">
+                </td>
+                <td id="F1A_10-otherProdCd_5">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_5" name="F1A_10_Results_othAct_5"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
+              </tr>
+              <tr id="F1A_10-otherDsp_6" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 6</label></td>
+                <td id="F1A_10-otherProd_6">
+                </td>
+                <td id="F1A_10-otherProdCd_6">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_6" name="F1A_10_Results_othAct_6"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
+              </tr>
+              <tr id="F1A_10-otherDsp_7" style="text-align:left; display:none">
+                <td class="tokei-table-col-head"><label>&nbsp;&nbsp;Other activity 7</label></td>
+                <td id="F1A_10-otherProd_7">
+                </td>
+                <td id="F1A_10-otherProdCd_7">
+                </td>
+                <td><input type="number" id="F1A_10_Results_othAct_7" name="F1A_10_Results_othAct_7"
+                    class="form-control tokei-textbox-item numberonly" placeholder="" min="0" max="9999999999" step="1"
+                    style="font-size:12px;"></td>
               </tr>
             </tbody>
           </table>
@@ -898,7 +1099,7 @@
         <!-- command button start -->
         <div class="container-fluid tokei-command-box text-right">
           <!-- answer -->
-<!--          <button type="button" class="btn btn-primary btn-lg tokei-btn-command" name="cmnSendKaito"
+          <!--          <button type="button" class="btn btn-primary btn-lg tokei-btn-command" name="cmnSendKaito"
             onclick="answer(document.forms[0], actname_send_kaito)">Send answer</button> -->
           <button type="button" class="btn tokei-btn-default tokei-btn-command"
             onclick="CmnSaveKaitoTmp(document.forms[0], actname_save_kaito_tmp)">Temporarily save</button>
@@ -910,6 +1111,9 @@
           <!-- Next Page -->
           <button type="button" class="btn btn-default tokei-btn-default btn-lg tokei-btn-command" name="cmnSendPage"
             onclick="pager(document.forms[0], actname_send_page, '02')">Next page</button>
+          <!-- Last Page -->
+          <button type="button" class="btn btn-default tokei-btn-default btn-lg tokei-btn-command" name="cmnSendPage"
+            onclick="pager(document.forms[0], actname_send_page, '03')">Last page</button>
         </div>
         <!-- command button end -->
 
@@ -929,7 +1133,7 @@
         <span>Select Level 5:</span><br>
         <select name="Level05" id="SelLvl05" onchange="Set_VSIC();"></select><br><br>
         <p>The selected VSIC is [<span id="VSIC_code" style="font-size:18px; color:red;">XXXXX</span>]</p>
-        <button id="vsic_ok" tag_id="" onclick="VSIC_close('ok')">OK</button>
+        <button id="vsic_ok" tag_id="" onclick="VSIC_close('ok','1A')">OK</button>
         <button id="vsic_cancel" onclick="VSIC_close('cancel')">Cancel</button>
 
       </div>

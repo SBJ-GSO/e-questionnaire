@@ -7,10 +7,13 @@ function VSIC_open(id) {
     $(window).resize(locateCenter);
 }
 
-function VSIC_close(status) {
+function VSIC_close(status,no) {
     if (status == "ok") {
         var wk_id = $('#vsic_ok').attr('tag_id');
         $("#" + wk_id).val(SelectCode);
+        if (no=="1A"){
+            F1A_Prod_Copy(wk_id);
+        }
     }
     $('#overlay, #modalWindowVSIC').fadeOut();
 }
