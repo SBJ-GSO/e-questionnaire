@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Create javascript for VSIC</title>
+</head>
+
+<body>
+    <h1>Work to prepare javascript used for VSIC selection</h1>
+    <div id="CreateSection" style="display:block;">
+        <form name="myform">
+            <p>Select the CSV file used for VSIC selection from the local folder.</p>
+            <p>Set items in the following order in the CSV file.</p>
+            <ol>
+                <li>Level01 code (1 digit uppercase letter)</li>
+                <li>Level02 code (2 digits)</li>
+                <li>Level03 code (3 digits)</li>
+                <li>Level04 code (4 digits)</li>
+                <li>Level05 code (5 digits)</li>
+                <li>Name</li>
+            </ol>
+            <input name="myfile" type="file" />
+            <br />
+            <p id="execute" style="color: red; display: none;">Executing...</p>
+            <p>Result javascript.</p>
+            <a download="VSIC_code.txt" id="downLoad" href="javascript:void(0)" style="display: none;" onclick="file_down()">
+                Download txt file</a><br>
+            <!-- <p>The JSON file is created with the name "Area.JSON" in the same folder as the input file.</p> -->
+            <textarea name="output" cols="100" rows="10"></textarea>
+    </div>
+    <script>
+        var VSICConstant;
+        //Get Form element of file selection part
+        var form = document.forms.myform;
+        //Processing when a file is specified
+        form.myfile.addEventListener('change', function (e) {
+            var result = e.target.files[0];
+            var reader = new FileReader();
+            // When file reading fails
+            reader.onerror = function () {
+                alert('File reading fails');
+            }
+            // When the file is read successfully
+            document.getElementById('execute').style.display = "block";
+
+            reader.onload = function () {
+                // Array data by row
+                var lineArr = reader.result.split("\n");
+                // Make data a two-dimensional array of rows and columns
+                var itemArr = [];
+                for (var i = 0; i < lineArr.length; i++) {
+                    itemArr[i] = lineArr[i].split(",");
+                }
+                RecordCount = 0;
+                OldLevel = 0;
+                for (var i = 0; i < lineArr.length - 1; i++) {
+                    for (var j = 0; j < itemArr[i].length; j++) {
+                        // Eliminate newline codes
+                        if (itemArr[i][j].charAt(itemArr[i][j].length - 1) == '\n') {
+                            itemArr[i][j] = itemArr[i][j].substring(0, itemArr[i][j].length - 1);
+                        }
+                        if (itemArr[i][j].charAt(itemArr[i][j].length - 1) == '\r') {
+                            itemArr[i][j] = itemArr[i][j].substring(0, itemArr[i][j].length - 1);
+                        }
+                        // Elimination of end double quotation
+                        if (itemArr[i][j].charAt(itemArr[i][j].length - 1) == '\"') {
+                            itemArr[i][j] = itemArr[i][j].substring(0, itemArr[i][j].length - 1);
+                        }
+                        // Elimination of start double quotation
+                        if (itemArr[i][j].charAt(0) == '\"') {
+                            itemArr[i][j] = itemArr[i][j].substring(1);
+                        }
+                    }
+                    Wrk = itemArr[i][0].concat(itemArr[i][1], itemArr[i][2], itemArr[i][3], itemArr[i][4]);
+                    WrkPos = lineArr[i].indexOf(",", Wrk.length + 4) + 1;
+                    VSICName = lineArr[i].substring(WrkPos);
+                    if (VSICName.charAt(VSICName.length - 1) == '\r') {
+                        VSICName = VSICName.substring(0, VSICName.length - 1);
+                    }
+                    // Elimination of end double quotation
+                    if (VSICName.charAt(VSICName.length - 1) == '\"') {
+                        VSICName = VSICName.substring(0, VSICName.length - 1);
+                    }
+                    // Elimination of start double quotation
+                    if (VSICName.charAt(0) == '\"') {
+                        VSICName = VSICName.substring(1);
+                    }
+                    if (VSICName != "Name" && VSICName != "") {
+                        RecordCount = RecordCount + 1;
+                        Level01Code = itemArr[i][0];
+                        Level02Code = itemArr[i][1];
+                        Level03Code = itemArr[i][2];
+                        Level04Code = itemArr[i][3];
+                        Level05Code = itemArr[i][4];
+                        if (Level01Code.length == 1 && (Level01Code >= "A" && Level01Code <= "Z")) {
+                            // alert("Wrk=[" + Wrk + "],WrkPos=[" + WrkPos + "],VSICName=[" + VSICName + "]");
+                            if (OldLevel > 1) {
+                                OutputArea = OutputArea + "]}]}]}]},";
+                            } else {
+                                OutputArea = "{\"VSIC\":[";
+                            }
+                            OutputArea = OutputArea + "{\"Level01Code\":\"" + Level01Code + "\",\"Level01Name\":\"" + VSICName + "\",\"Level02\":[";
+                            OldLevel = 1;
+                        }
+                        if (Level02Code.length == 2 && !(isNaN(Level02Code))) {
+                            if (OldLevel > 2) {
+                                OutputArea = OutputArea + "]}]}]},";
+                            }
+                            OutputArea = OutputArea + "{\"Level02Code\":\"" + Level02Code + "\",\"Level02Name\":\"" + VSICName + "\",\"Level03\":[";
+                            OldLevel = 2;
+                        }
+                        if (Level03Code.length == 3 && !(isNaN(Level03Code))) {
+                            if (OldLevel > 3) {
+                                OutputArea = OutputArea + "]}]},";
+                            }
+                            OutputArea = OutputArea + "{\"Level03Code\":\"" + Level03Code + "\",\"Level03Name\":\"" + VSICName + "\",\"Level04\":[";
+                            OldLevel = 3;
+                        }
+                        if (Level04Code.length == 4 && !(isNaN(Level04Code))) {
+                            if (OldLevel > 4) {
+                                OutputArea = OutputArea + "]},";
+                            }
+                            OutputArea = OutputArea + "{\"Level04Code\":\"" + Level04Code + "\",\"Level04Name\":\"" + VSICName + "\",\"Level05\":[";
+                            OldLevel = 4;
+                        }
+                        if (Level05Code.length == 5 && !(isNaN(Level05Code))) {
+                            if (OldLevel == 5) {
+                                OutputArea = OutputArea + ",";
+                            }
+                            OutputArea = OutputArea + "{\"Level05Code\":\"" + Level05Code + "\",\"Level05Name\":\"" + VSICName + "\"}";
+                            OldLevel = 5;
+                        }
+                    }
+                }
+                OutputArea = OutputArea + "]}]}]}]}]}";
+                VSICConstant = JSON.parse(OutputArea);
+                OutputArea = 'var VSICConstant=' + OutputArea + ";";
+                form.output.textContent = OutputArea;
+                document.getElementById('downLoad').style.display = "block";
+                document.getElementById('execute').style.display = "none";
+            }
+            reader.readAsText(result);
+        })
+        function file_down() {
+            var fileDL = new Blob([OutputArea], { type: "text/plain" });
+            if (navigator.msSaveBlob) {
+            // For IE
+            navigator.msSaveBlob(fileDL, "VSIC_code.txt");
+            }
+            else {
+                document.getElementById('downLoad').href = URL.createObjectURL(fileDL);
+            }
+            ;
+        }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Create javascript for Administrative area</title>
+
+</head>
+
+<body>
+    <h1>Work to prepare javascript used for area selection</h1>
+    <div id="CreateSection" style="display:block;">
+        <form name="myform">
+            <p>Select the CSV file used for area selection from the local folder.</p>
+            <p>Set items in the following order in the CSV file.</p>
+            <ol>
+                <li>Commune code</li>
+                <li>Commune Name</li>
+                <li>District code</li>
+                <li>District Name</li>
+                <li>Province code</li>
+                <li>Province Name</li>
+            </ol>
+            <input name="myfile" type="file" />
+            <br />
+            <p id="execute" style="color: red; display: none;">Executing...</p>
+            <p>Result javascript.</p>
+            <a download="province-var.txt" id="downLoad" href="javascript:void(0)" style="display: none;" onclick="file_down()">
+                Download txt file</a><br>
+            <!-- <p>The JSON file is created with the name "Area.JSON" in the same folder as the input file.</p> -->
+            <textarea name="output" cols="100" rows="10"></textarea>
+        </form>
+    </div>
+    <script>
+        var AreaConstant;
+        //Get Form element of file selection part
+        var form = document.forms.myform;
+        //Processing when a file is specified
+        form.myfile.addEventListener('change', function (e) {
+            var result = e.target.files[0];
+            var reader = new FileReader();
+            // When file reading fails
+            reader.onerror = function () {
+                alert('File reading fails');
+            }
+            // When the file is read successfully
+            document.getElementById('execute').style.display = "block";
+
+            reader.onload = function () {
+                // Array data by row
+                var lineArr = reader.result.split("\n");
+                // Make data a two-dimensional array of rows and columns
+                var itemArr = [];
+                for (var i = 0; i < lineArr.length; i++) {
+                    itemArr[i] = lineArr[i].split(",");
+                }
+                var OldKeyPD;
+                var OldKeyP;
+                RecordCount = 0;
+                for (var i = 0; i < lineArr.length - 1; i++) {
+                    for (var j = 0; j < itemArr[i].length; j++) {
+                        // Eliminate newline codes
+                        if (itemArr[i][j].charAt(itemArr[i][j].length - 1) == '\n') {
+                            itemArr[i][j] = itemArr[i][j].substring(0, itemArr[i][j].length - 1);
+                        }
+                        if (itemArr[i][j].charAt(itemArr[i][j].length - 1) == '\r') {
+                            itemArr[i][j] = itemArr[i][j].substring(0, itemArr[i][j].length - 1);
+                        }
+                        // Elimination of end double quotation
+                        if (itemArr[i][j].charAt(itemArr[i][j].length - 1) == '\"') {
+                            itemArr[i][j] = itemArr[i][j].substring(0, itemArr[i][j].length - 1);
+                        }
+                        // Elimination of start double quotation
+                        if (itemArr[i][j].charAt(0) == '\"') {
+                            itemArr[i][j] = itemArr[i][j].substring(1);
+                        }
+                    }
+                    if (!(isNaN(itemArr[i][0]))) {
+                        RecordCount = RecordCount + 1;
+                        ProvinceCode = itemArr[i][4];
+                        ProvinceName = itemArr[i][5];
+                        DistrictCode = itemArr[i][2];
+                        DistrictName = itemArr[i][3];
+                        CommuneName = itemArr[i][1];
+                        AreaCode = ProvinceCode + DistrictCode + itemArr[i][0];
+                        CommueCode = itemArr[i][0];
+                        NewKeyPD = ProvinceCode + DistrictCode;
+                        NewKeyP = ProvinceCode;
+                        if (OldKeyPD == NewKeyPD) {
+                            OutputArea = OutputArea + ',{\"CommuneCode\":\"' + CommueCode + '\",\"CommuneName\":\"' + CommuneName + '\"}';
+                        } else {
+                            if (OldKeyP == NewKeyP) {
+                                OutputArea = OutputArea + ']},{\"DistrictCode\":\"' + DistrictCode + '\",\"DistrictName\":\"' + DistrictName + '\",\"Commune\":[{\"CommuneCode\":\"' + CommueCode + '\",\"CommuneName\":\"' + CommuneName + '\"}';
+                            } else {
+                                if (RecordCount == 1) {
+                                    OutputArea = '{\"Province\":[{\"ProvinceCode\":\"' + ProvinceCode + '\",\"ProvinceName\":\"' + ProvinceName + '\",\"District\":[{\"DistrictCode\":\"' + DistrictCode + '\",\"DistrictName\":\"' + DistrictName + '\",\"Commune\":[{\"CommuneCode\":\"' + CommueCode + '\",\"CommuneName\":\"' + CommuneName + '\"}';
+                                } else {
+                                    OutputArea = OutputArea + ']}]},{\"ProvinceCode\":\"' + ProvinceCode + '\",\"ProvinceName\":\"' + ProvinceName + '\",\"District\":[{\"DistrictCode\":\"' + DistrictCode + '\",\"DistrictName\":\"' + DistrictName + '\",\"Commune\":[{\"CommuneCode\":\"' + CommueCode + '\",\"CommuneName\":\"' + CommuneName + '\"}';
+                                }
+                            }
+                        }
+                        OldKeyPD = NewKeyPD;
+                        OldKeyP = NewKeyP;
+                    }
+                }
+                OutputArea = OutputArea + ']}]}]}';
+                OutputArea = 'var AreaConstant=' + OutputArea + ";";
+                form.output.textContent = OutputArea;
+                document.getElementById('downLoad').style.display = "block";
+                document.getElementById('execute').style.display = "none";
+            }
+            reader.readAsText(result);
+
+        })
+        function file_down() {
+            var fileDL = new Blob([OutputArea], { type: "text/plain" });
+            if (navigator.msSaveBlob) {
+            // For IE
+            navigator.msSaveBlob(fileDL, "province-var.txt");
+            }
+            else {
+                document.getElementById('downLoad').href = URL.createObjectURL(fileDL);
+            }
+            ;
+        }
+
+
+    </script>
+</body>
+
+</html>
