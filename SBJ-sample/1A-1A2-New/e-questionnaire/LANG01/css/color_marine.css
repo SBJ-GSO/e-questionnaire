@@ -1,0 +1,576 @@
+@charset "utf-8";
+
+/**
+ * filename: color_marine.css
+ * @version 1.0.1 2015-12-14
+ */
+
+/* marine */
+
+/**
+* common
+*/
+body {
+	background: #FFF;
+	color: #333;
+}
+
+@media screen and (min-width: 1200px) {
+	/*.container {
+		width: 960px;
+	}*/
+}
+
+a:link {
+	color: #9d9d9d;
+}
+
+a:visited {
+}
+
+a:hover{
+}
+
+a:active{
+}
+
+a:focus {
+}
+
+
+.tokei-text-important {
+	color: #006bb7;
+}
+
+
+
+/* ----- header ----- */
+.tokei-head-nav{
+	background:#5383a6;
+}
+h1.h1-tokei{
+	color:#fff;
+}
+.tokei-head-left .tokei-head-btn-menu {
+	border-color: #C9C8C2;
+}
+
+.tokei-head-left .tokei-head-btn-menu:hover,
+.tokei-head-left .tokei-head-btn-menu:focus,
+.tokei-head-left .tokei-head-btn-menu:active {
+	background-color: #EFEDEA;
+}
+
+
+.tokei-head-right .tokei-head-menu {
+	border-top:5px #006bb7 solid;
+}
+
+.tokei-head-right .tokei-head-menu li {
+	border-right: 1px #C9C8C2 solid;
+}
+
+
+.tokei-head-right .tokei-head-menu li a {
+	color: #333333;
+}
+
+
+.tokei-glyphicon-faq {
+	background: transparent url('../img/tokei-common-head-icon.png') no-repeat left top;
+}
+
+.tokei-glyphicon-toiawase {
+	background: transparent url('../img/tokei-common-head-icon.png') no-repeat left -44px;
+}
+
+.tokei-glyphicon-help {
+	background: transparent url('../img/tokei-common-head-icon.png') no-repeat left -88px;
+}
+
+.tokei-head-logout-btn {
+	background-color: #006bb7;
+	color: #FFFFFF;
+}
+
+.tokei-head-logout-btn:hover,
+.tokei-head-logout-btn:focus,
+.tokei-head-logout-btn:active {
+	background-color: #9d9d9d;
+	color: #FFFFFF;
+}
+
+@media screen and (max-width: 767px) {
+	.tokei-head-left {
+	}
+	
+	.tokei-head-right {
+		margin: 0;
+		padding: 0;
+		background: transparent url('../img/tokei-common-head-menu-bg.png') repeat bottom left;
+		border: none;
+	}
+		
+	.tokei-head-right .tokei-head-menu li {
+		border-top: 1px #FFFFFF solid;
+	}
+
+	.tokei-head-right .tokei-head-menu li a {
+		color: #333333;
+	}
+
+	.tokei-head-right .tokei-head-menu li:last-child {
+		border-bottom: 1px #FFFFFF solid;
+	}
+	
+	.tokei-head-right .tokei-head-menu li:hover,
+	.tokei-head-right .tokei-head-menu li:focus,
+	.tokei-head-right .tokei-head-menu li:active {
+		background-color: #F0EFEC;
+	}
+		
+	.tokei-head-logout-btn {
+		color: #333333;
+		border-bottom: 1px #C9C8C2 solid;
+	}
+	
+	.tokei-head-logout-btn:hover,
+	.tokei-head-logout-btn:focus,
+	.tokei-head-logout-btn:active {
+		background: none;
+		background-color: transparent;
+		color: #666666;
+	}
+
+	.tokei-head-menu-close {
+		background-color: #606060;
+		color: #FFFFFF;
+	}
+
+	.tokei-head-menu-close:hover,
+	.tokei-head-menu-close:focus,
+	.tokei-head-menu-close:active {
+		background-color: #707070;
+		color: #FFFFFF;
+	}
+}
+
+
+
+/* ----- breadcrumb ----- */
+.tokei-breadcrumb {
+	background-color: #FFFFFF;
+}
+
+@media screen and (max-width: 767px) {
+	.tokei-breadcrumb {
+		border-top: 1px #C9C8C2 solid;
+		background-color: #ddf0fd;
+	}		
+}
+
+
+
+.tokei-breadcrumb .glyphicon {
+	color: #666666;
+}
+
+.tokei-glyphicon-arrow-right {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -60px;	
+	width: 15px;
+	height: 15px;
+}
+
+
+.tokei-breadcrumb > li + li {
+	
+}
+
+
+/* ----- heading ----- */
+
+h1.tokei-h1 {
+	background: transparent url('../img/tokei-common-h1-bg-repeat.png') repeat bottom right;
+	color: #FFFFFF;
+}
+
+h1.tokei-h1 span{
+	background: transparent url('../img/tokei-common-h1-bg.png') no-repeat bottom right;
+}
+
+h2.tokei-h2 {
+	border-bottom: solid #E1E0D9 3px;
+}
+
+h2.tokei-h2 span {
+	border-bottom: solid #006bb7 3px;
+}
+
+h2.tokei-h2 span.glyphicon {
+	border-bottom: none;
+}
+
+h3.tokei-h3 {
+	border-left: solid #006bb7 8px;
+}
+
+h4 {
+}
+
+/* ----- message area ----- */
+.alert {
+	color: #333333;
+}
+
+
+
+.tokei-alert-info {
+	background-color: #D5EBF6;
+	border: 1px #9ACFEA solid;
+}
+
+.tokei-alert-confirmation {
+	background-color: #DFF0D8;
+	border: 1px #B2DBA1 solid;
+}
+
+.tokei-alert-warning {
+	background-color: #FAF4D2;
+	border: 1px #F5E79E solid;
+}
+
+.tokei-alert-danger {
+	background-color: #F1DDDD;
+	border: 1px #DCA7A7 solid;
+}
+
+
+.tokei-glyphicon-info {
+	background: transparent url('../img/tokei-common-message-icon.png') no-repeat 0px 0px;		
+}
+
+.tokei-glyphicon-confirmation {
+	background: transparent url('../img/tokei-common-message-icon.png') no-repeat 0px -34px;		
+}
+
+.tokei-glyphicon-warning {
+	background: transparent url('../img/tokei-common-message-icon.png') no-repeat 0px -68px;		
+}
+
+.tokei-glyphicon-danger {
+	background: transparent url('../img/tokei-common-message-icon.png') no-repeat 0px -102px;		
+}
+
+
+
+/* ----- panel area ----- */
+.tokei-panel-default {
+	border: solid #004677 1px;
+}
+
+.tokei-panel-default .tokei-panel-foot {
+	background-color: #ddf0fd;
+	border-top: solid #004677 1px;
+}
+
+.tokei-panel-default .btn {
+	margin-left: 10px;
+}
+
+/* ----- list ----- */
+
+/* list marker */
+
+.tokei-glyphicon-list-text {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -45px;
+}
+
+
+
+/* link icon */
+
+.tokei-glyphicon-link-inner {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px 0px;
+}
+
+.tokei-glyphicon-link-outer {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -15px;
+	padding-left: 20px;
+}
+
+.tokei-glyphicon-link-ssl {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -30px;
+	padding-left: 18px;
+}
+
+
+@media screen and (max-width: 767px) {
+	.tokei-link-list li {
+		border-bottom: 1px solid #CCCCCC;
+		padding: 6px 0 8px 5px;
+	}
+
+	.tokei-link-list li:first-child {
+		border-top: 1px solid #CCCCCC;
+	}
+	
+	.tokei-link-list li:hover,
+	.tokei-link-list li:focus,
+	.tokei-link-list li:active {
+		background-color: rgba(96,96,96,0.08);
+
+	}
+}
+
+
+/* ----- button ----- */
+.input {
+}
+
+.tokei-btn-default,
+.tokei-btn-default:link {
+	background-image: linear-gradient(to bottom, #fff 0px, #F0EFEC 100%);
+	background-color: #F3F3F3;
+	border-color: #ccc;
+	text-shadow: none;
+	border: solid #BFBDB5 1px;
+	color: #333;
+	text-decoration: none;
+}
+
+.tokei-btn-default:visited ,
+.tokei-btn-default:hover,
+.tokei-btn-default:focus,
+.tokei-btn-default:active {
+	background-image: none;
+	color: #333;
+	background-color: #F0EFEC;
+}
+
+.tokei-btn-important,
+.tokei-btn-important:link {
+	background-color: #004677;
+	border-color: #ccc;
+	text-shadow: none;
+	border: none;
+	color: #FFF;
+	text-decoration: none;
+}
+
+.tokei-btn-important:visited ,
+.tokei-btn-important:hover,
+.tokei-btn-important:focus,
+.tokei-btn-important:active {
+	color: #FFF;
+	background-color: #0072c4;
+}
+	
+
+/* ----- form ----- */
+
+
+.tokei-table-box  {
+	border-top: solid 2px #004677;
+}
+
+.tokei-table-tr {
+	background-color: #ddf0fd;
+	border-bottom: solid 2px #004677;
+}
+
+.tokei-table-th {
+	background-color: #ddf0fd;
+}
+
+.tokei-table-td {
+	background-color: #FFFFFF;
+}
+
+.tokei-label-important {
+	background-color: #C00000;
+}
+
+
+/* ----- list table ----- */
+.tokei-table-fixed {
+	table-layout: fixed;
+}
+
+.tokei-table-scroll {
+	display: inline-block;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+}
+
+.tokei-table-list > thead > tr hover {
+	background-color: #EDF4E3;
+}
+
+.tokei-table-list > thead > tr > th {
+	background-color: #ddf0fd;
+	border-bottom: 2px solid #004677;
+}
+
+.tokei-table-col-head {
+	background-color: #ddf0fd;
+}
+
+.table > caption + thead > tr:first-child > td,
+.table > caption + thead > tr:first-child > th  {
+	border-top: 1px solid #004677;
+}
+.table > tbody > tr > td, 
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th  {
+	border-bottom: 1px solid #004677;
+}
+
+.tokei-table-list tbody tr:hover {
+	background-color: #DFF0EF;
+}
+
+
+/* ----- sort link ----- */
+
+.tokei-glyphicon-table-sort {
+	width: 15px;
+	height: 15px;
+	margin: 2px 3px 0 0;
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -165px;
+}
+
+
+/* ----- pager ----- */
+
+
+.tokei-glyphicon-chevron2-left {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -76px;	
+}
+
+.tokei-glyphicon-chevron-left {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -91px;	
+}
+
+.tokei-glyphicon-chevron2-right {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -106px;	
+}
+
+
+.tokei-glyphicon-chevron-right {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -121px;	
+}
+
+.pagination>li>a:focus,
+.pagination>li>a:hover,
+.pagination>li>span:focus,
+.pagination>li>span:hover{
+	color:#9d9d9d;
+	background-color: #eee;
+	border-color:#ddd;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+	background-color: #006bb7;
+	border-color:#c3c3c3;
+}
+
+.pagination>li>a,
+.pagination>li>span{
+	color:#006bb7;
+
+}
+
+
+/* ----- open/close link ----- */
+
+.tokei-link-list .tokei-glyphicon-link-open {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -149px;
+	margin-left: 5px;
+}
+
+.collapsed .tokei-glyphicon-link-open {
+	background: transparent url('../img/tokei-common-icon.png') no-repeat 0px -134px;
+}
+
+
+
+/* ----- command button ----- */
+.tokei-command-box {
+	border-top: 1px solid #CCCCCC;
+}
+
+
+
+/* ----- footer ----- */
+.tokei-foot {
+	/**background: transparent url('../img/tokei-common-head-bg.png') repeat bottom left;**/
+	border-top: 1px #004677 solid;
+}
+
+.tokei-foot-open {
+	background-color: #E6E3DD;
+	border-bottom: 1px solid #c9c8c2;
+}
+
+.tokei-foot-open a:link {
+	color: #333333;
+}
+
+.tokei-foot-link li {
+	border-left: 1px #C9C8C2 solid;
+}
+
+
+@media screen and (max-width: 767px) {
+
+	.tokei-foot-link li {
+		border-bottom: 1px #004677 solid;
+	}
+}
+
+.tokei-foot-link li a {
+	color: #333333;
+}
+
+.toukei-link-pagetop {
+	color: #FFFFFF;
+}
+
+.tokei-foot-link li a:hover,
+.tokei-foot-link li a:focus,
+.tokei-foot-link li a:active {
+	background-color: transparent;
+}
+
+.tokei-copyright {
+	background-color: #FFFFFF;
+	border-top: 1px #EEEDE8 solid;
+	border-bottom:5px #006bb7 solid;
+}
+
+
+/* ----- move to the page top ----- */
+
+#page-top a {
+	background-color: #000000;
+	color: #fff;
+}
+#page-top a:hover {
+	background-color: #707070;
+}
+
+#page-top .glyphicon {
+	color: #D3D1CD;
+}
+
+.common-error-color {
+	background-color: #FF99CC;
+}
