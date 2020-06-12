@@ -185,662 +185,269 @@ function checkController(iForm) {
 	var messages = new Array();
 
 	// Single item input check(1A)
-	if (questionnaire_id == "1A") {
-		var err_status_1A = true;
-		var err_page_1A = 1;
-		if (document.getElementById("1449") != undefined) {
-			var target = 'F1A_1_Name_Ent';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_1_1'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
 
-		if (document.getElementById("1453") != undefined) {
-			var target = 'F1A_1_TaxCode_Ent';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_1_2'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-			else if (!CmnNumChk(iForm, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_1_3'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-			else if (!CmnLenChk(iForm, 10, 10, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_1_4'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("1454") != undefined) {
-			var target = 'F1A_1_TaxCode_Estb';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnNumChk(iForm, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_1_5'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-			else if (!CmnLenChk(iForm, 0, 3, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_1_6'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("Province-1A") != undefined) {
-			var target = 'F1A_2_Province';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (document.getElementById("Province-1A").selectedIndex <= 0) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_1'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("District-1A") != undefined) {
-			var target = 'F1A_2_District';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (document.getElementById("District-1A").selectedIndex <= 0) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_2'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("Commune-1A") != undefined) {
-			var target = 'F1A_2_Commune';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (document.getElementById("Commune-1A").selectedIndex <= 0) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_3'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4636") != undefined) {
-			var target = 'F1A_2_TelNum_Area';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_4'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-			else if (!CmnNumChk(iForm, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_5'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4637") != undefined) {
-			var target = 'F1A_2_TelNum_Num';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_4'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-			else if (!CmnNumChk(iForm, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_2_5'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4640") != undefined) {
-			var target = 'F1A_2_Email';
-			var reg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (document.getElementById("4640").value != "") {
-				if (!document.getElementById("4640").value.match(reg)) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_2_6'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-			}
-		}
-		if (document.getElementById("4645") != undefined) {
-			var target = 'F1A_3_Eco_Owner';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			$("#4645-div").removeClass("common-error-color");
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_3_1'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-				$("#4645-div").addClass("common-error-color");
-			}
-		}
-
-		if (document.getElementById("4646") != undefined) {
-			var target = 'F1A_3_Eco_Owner_03_01';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_3_2'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4646-1") != undefined) {
-			var target = 'F1A_3_Eco_Owner_03_02';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_3_3'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4647") != undefined) {
-			var target = 'F1A_3_Eco_Owner_08_01';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_3_4'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4687") != undefined) {
-			var target = 'F1A_3_Eco_Owner_10_02';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_3_10'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("F1A_4-KeyProd") != undefined) {
-			var target = 'F1A_4_KeyProdcut';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_4_1'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("F1A_4-KeyProdCd") != undefined) {
-			var target = 'F1A_4_KeyProdcutCode';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_4_2'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-
-		if (document.getElementById("4705") != undefined) {
-			var target = 'F1A_5_Buy';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			$("#4705-0").removeClass("common-error-color");
-			if (!CmnInputChk(iForm, 1, target)) {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_5_1'],
-					values: new Array()
-				}));
-				$("#4705-0").addClass("common-error-color");
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-		// Correlation check
-		//Q3. Enterprise's economic ownership
-		var wk_F1A_3_Eco = getFormObject(iForm).elements["F1A_3_Eco_Owner"].value;
-		switch (wk_F1A_3_Eco) {
-			case "03":
-				var wk_central = Number(document.getElementById("4646").value);
-				var wk_local = Number(document.getElementById("4646-1").value);
-				var wk_capital = wk_central + wk_local;
-				var target = 'F1A_3_Eco_Owner_03_01';
-				setBeforeClassName(iForm, target);
-				CmnModClass(iForm, NORMAL_CLASS, target);
-				if (wk_capital <= 50) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_3_5'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-					$("#4646-1").addClass("common-error-color");
-				}
-				else {
-					if (wk_capital > 100) {
-						messages.push(commonError(iForm, {
-							target: target,
-							errmsg: inputCheckErrorMessage['F1A_3_6'],
-							values: new Array()
-						}));
-						err_status_1A = false;
-						err_page_1A = 1;
-						$("#4646-1").addClass("common-error-color");
-					}
-				}
-				break;
-			case "08":
-				var wk_capital = Number(document.getElementById("4647").value);
-				var target = 'F1A_3_Eco_Owner_08_01';
-				setBeforeClassName(iForm, target);
-				CmnModClass(iForm, NORMAL_CLASS, target);
-				if (wk_capital > 50) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_3_7'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-				break;
-			case "10":
-				var target = 'F1A_3_Eco_Owner_10_01';
-				setBeforeClassName(iForm, target);
-				CmnModClass(iForm, NORMAL_CLASS, target);
-				$("#4688-0").removeClass("common-error-color");
-				if (!CmnInputChk(iForm, 1, target)) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_3_8'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-					$("#4688-0").addClass("common-error-color");
-
-				}
-				var target = 'F1A_3_Eco_Owner_10_02';
-				setBeforeClassName(iForm, target);
-				CmnModClass(iForm, NORMAL_CLASS, target);
-				if (!CmnInputChk(iForm, 1, target)) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_3_9'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-				break;
-
-		}
-		//Q4.2. Other activity code.
-		for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
-			let wk_F1A_4_Oth = getFormObject(iForm).elements["F1A_4-otherProd_" + i].value;
-			let wk_F1A_4_OthCd = getFormObject(iForm).elements["F1A_4-otherProdCd_" + i].value;
-			var target = 'F1A_4_OtherProdcutCd_' + i;
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (wk_F1A_4_Oth != "") {
-				if (!CmnInputChk(iForm, 1, target)) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_4_4'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-			}
-			var target = 'F1A_4_OtherProdcut_' + i;
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (wk_F1A_4_OthCd != "") {
-				if (!CmnInputChk(iForm, 1, target)) {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_4_3'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-			}
-
-		}
-
-		//Q6. Total money that enterprise received from...
-		var wk_F1A_5_Buy = getFormObject(iForm).elements["F1A_5_Buy"].value;
-		var target = 'F1A_6_received';
+	if (document.getElementById("1449") != undefined) {
+		var target = 'F1A_1_Name_Ent';
 		setBeforeClassName(iForm, target);
 		CmnModClass(iForm, NORMAL_CLASS, target);
-		$("#4709").removeClass("common-error-color");
-		if (wk_F1A_5_Buy == "1") {
-			var wk_F1A_6_1 = Number(document.getElementById("4707").value);
-			var wk_F1A_6_2 = Number(document.getElementById("4709").value);
-			if (wk_F1A_6_1 > 0 || wk_F1A_6_2 > 0) {
-			}
-			else {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_6_1'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-				$("#4709").addClass("common-error-color");
-			}
-		}
-		//Q7.2 Labour(female).
-		var wk_F1A_7_2_t = Number(document.getElementById("4713").value);
-		var wk_F1A_7_2_f = Number(document.getElementById("4714").value);
-		var target = 'F1A_7_Labour_2';
-		setBeforeClassName(iForm, target);
-		CmnModClass(iForm, NORMAL_CLASS, target);
-		$("#4714").removeClass("common-error-color");
-		if (wk_F1A_7_2_t < wk_F1A_7_2_f) {
+		if (!CmnInputChk(iForm, 1, target)) {
 			messages.push(commonError(iForm, {
 				target: target,
-				errmsg: inputCheckErrorMessage['F1A_7_1'],
+				errmsg: inputCheckErrorMessage['F1A_1_1'],
 				values: new Array()
 			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#4714").addClass("common-error-color");
 		}
-		//Q7.3 Labour as of .
-		var wk_F1A_7_3_t = Number(document.getElementById("5557").value);
-		var wk_F1A_7_3_2 = Number(document.getElementById("5558").value);
-		var wk_F1A_7_3_3 = Number(document.getElementById("5559").value);
-		var wk_F1A_7_3_4 = Number(document.getElementById("5560").value);
-		var wk_F1A_7_3_5 = Number(document.getElementById("5561").value);
-		var target = 'F1A_7_3_Total_1';
-		setBeforeClassName(iForm, target);
-		CmnModClass(iForm, NORMAL_CLASS, target);
-		$("#5558").removeClass("common-error-color");
-		$("#5559").removeClass("common-error-color");
-		$("#5560").removeClass("common-error-color");
-		$("#5561").removeClass("common-error-color");
-		if (wk_F1A_7_3_t < wk_F1A_7_3_2) {
-			messages.push(commonError(iForm, {
-				target: target,
-				errmsg: inputCheckErrorMessage['F1A_7_2'],
-				values: new Array()
-			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#5558").addClass("common-error-color");
-		}
-		if (wk_F1A_7_3_t < wk_F1A_7_3_3) {
-			messages.push(commonError(iForm, {
-				target: target,
-				errmsg: inputCheckErrorMessage['F1A_7_3'],
-				values: new Array()
-			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#5559").addClass("common-error-color");
-		}
-		if (wk_F1A_7_3_t < wk_F1A_7_3_4) {
-			messages.push(commonError(iForm, {
-				target: target,
-				errmsg: inputCheckErrorMessage['F1A_7_4'],
-				values: new Array()
-			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#5560").addClass("common-error-color");
-		}
-		if (wk_F1A_7_3_t < wk_F1A_7_3_5) {
-			messages.push(commonError(iForm, {
-				target: target,
-				errmsg: inputCheckErrorMessage['F1A_7_5'],
-				values: new Array()
-			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#5561").addClass("common-error-color");
-		}
-		if (wk_F1A_3_Eco == "01" || wk_F1A_3_Eco == "02" || wk_F1A_3_Eco == "03" || wk_F1A_3_Eco == "04") {
-			if (wk_F1A_7_3_3 > 0 && wk_F1A_7_3_4 == 0) {
-			}
-			else {
-				target = "F1A_7_3_Total_3";
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_7_6'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-				$("#5560").addClass("common-error-color");
-
-			}
-
-		}
-		//Q7.3 By business production activity...
-		var wk_F1A_7_3_p_num = 0;
-		target = "F1A_7_3_keyActivity_total_1";
-		setBeforeClassName(iForm, target);
-		CmnModClass(iForm, NORMAL_CLASS, target);
-		if (document.getElementById("F1A_4-KeyProdCd").value !== "") {
-			var wk_F1A_7_3_key = Number(document.getElementById("F1A_7_3_keyActivity_total_1").value);
-			if (wk_F1A_7_3_key > 0) {
-				wk_F1A_7_3_p_num = wk_F1A_7_3_p_num + wk_F1A_7_3_key;
-			}
-			else {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_7_7'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-		for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
-			let wk_F1A_othcd_id = "F1A_4-otherProdCd_" + i;
-			let wk_F1A_oth_id_na = "F1A_7_3_othAct_total_" + i;
-			target = wk_F1A_oth_id_na;
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (document.getElementById(wk_F1A_othcd_id).value !== "") {
-				let wk_F1A_7_3_oth = Number(document.getElementById(wk_F1A_oth_id_na).value);
-				if (wk_F1A_7_3_oth > 0) {
-					wk_F1A_7_3_p_num = wk_F1A_7_3_p_num + wk_F1A_7_3_oth;
-				}
-				else {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_7_7'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-			}
-		}
-		if (wk_F1A_7_3_t < wk_F1A_7_3_p_num) {
-			var target = 'F1A_7_3_Total_1';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			messages.push(commonError(iForm, {
-				target: target,
-				errmsg: inputCheckErrorMessage['F1A_7_8'],
-				values: new Array()
-			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#F1A_7_3_keyActivity_total_1").addClass("common-error-color");
-			for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
-				let wk_F1A7_oth_id = "#F1A_7_3_othAct_total_" + i;
-				$(wk_F1A7_oth_id).addClass("common-error-color");
-			}
-		}
-		//Q10. Results of business production...
-		var wk_F1A_10_p_num = 0;
-		target = "F1A_10_Results_KeyAct";
-		setBeforeClassName(iForm, target);
-		CmnModClass(iForm, NORMAL_CLASS, target);
-		if (document.getElementById("F1A_4-KeyProdCd").value !== "") {
-			var wk_F1A_10_key = Number(document.getElementById("F1A_10_Results_KeyAct").value);
-			if (wk_F1A_10_key > 0) {
-				wk_F1A_10_p_num = wk_F1A_10_p_num + wk_F1A_10_key;
-			}
-			else {
-				messages.push(commonError(iForm, {
-					target: target,
-					errmsg: inputCheckErrorMessage['F1A_10_1'],
-					values: new Array()
-				}));
-				err_status_1A = false;
-				err_page_1A = 1;
-			}
-		}
-		for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
-			let wk_F1A_othcd_id = "F1A_4-otherProdCd_" + i;
-			let wk_F1A_oth_id_na = "F1A_10_Results_othAct_" + i;
-			target = wk_F1A_oth_id_na;
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			if (document.getElementById(wk_F1A_othcd_id).value !== "") {
-				let wk_F1A_10_oth = Number(document.getElementById(wk_F1A_oth_id_na).value);
-				if (wk_F1A_10_oth > 0) {
-					wk_F1A_10_p_num = wk_F1A_10_p_num + wk_F1A_10_oth;
-				}
-				else {
-					messages.push(commonError(iForm, {
-						target: target,
-						errmsg: inputCheckErrorMessage['F1A_10_1'],
-						values: new Array()
-					}));
-					err_status_1A = false;
-					err_page_1A = 1;
-				}
-			}
-		}
-		let wk_F1A_10_t = Number(document.getElementById("F1A_10_Results_Total").value);
-		if (wk_F1A_10_t < wk_F1A_10_p_num) {
-			var target = 'F1A_10_Results_Total';
-			setBeforeClassName(iForm, target);
-			CmnModClass(iForm, NORMAL_CLASS, target);
-			messages.push(commonError(iForm, {
-				target: target,
-				errmsg: inputCheckErrorMessage['F1A_10_2'],
-				values: new Array()
-			}));
-			err_status_1A = false;
-			err_page_1A = 1;
-			$("#F1A_10_Results_KeyAct").addClass("common-error-color");
-			for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
-				let wk_F1A10_oth_id = "#F1A_10_Results_othAct_" + i;
-				$(wk_F1A10_oth_id).addClass("common-error-color");
-			}
-		}
-		if (!(err_status_1A)) {
-			INT_pager('Page',err_page_1A);
-		}
-
 	}
+
+	if (document.getElementById("1453") != undefined) {
+		var target = 'F1A_1_TaxCode_Ent';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_1_2'],
+				values: new Array()
+			}));
+		}
+		else if (!CmnNumChk(iForm, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_1_3'],
+				values: new Array()
+			}));
+		}
+		else if (!CmnLenChk(iForm, 10, 10, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_1_4'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("1454") != undefined) {
+		var target = 'F1A_1_TaxCode_Estb';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnNumChk(iForm, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_1_5'],
+				values: new Array()
+			}));
+		}
+		else if (!CmnLenChk(iForm, 0, 3, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_1_6'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("Province-1A") != undefined) {
+		var target = 'F1A_2_Province';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (document.getElementById("Province-1A").selectedIndex <= 0) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_1'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("District-1A") != undefined) {
+		var target = 'F1A_2_District';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (document.getElementById("District-1A").selectedIndex <= 0) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_2'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("Commune-1A") != undefined) {
+		var target = 'F1A_2_Commune';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (document.getElementById("Commune-1A").selectedIndex <= 0) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_3'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4636") != undefined) {
+		var target = 'F1A_2_TelNum_Area';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_4'],
+				values: new Array()
+			}));
+		}
+		else if (!CmnNumChk(iForm, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_5'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4637") != undefined) {
+		var target = 'F1A_2_TelNum_Num';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_4'],
+				values: new Array()
+			}));
+		}
+		else if (!CmnNumChk(iForm, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_2_5'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4640") != undefined) {
+		var target = 'F1A_2_Email';
+		var reg = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (document.getElementById("4640").value != "") {
+			if (!document.getElementById("4640").value.match(reg)) {
+				messages.push(commonError(iForm, {
+					target: target,
+					errmsg: inputCheckErrorMessage['F1A_2_6'],
+					values: new Array()
+				}));
+			}
+		}
+	}
+	if (document.getElementById("4645") != undefined) {
+		var target = 'F1A_3_Eco_Owner';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		$("#4645-div").removeClass("common-error-color");
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_3_1'],
+				values: new Array()
+			}));
+			$("#4645-div").addClass("common-error-color");
+		}
+	}
+
+	if (document.getElementById("4646") != undefined) {
+		var target = 'F1A_3_Eco_Owner_03_01';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_3_2'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4646-1") != undefined) {
+		var target = 'F1A_3_Eco_Owner_03_02';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_3_3'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4647") != undefined) {
+		var target = 'F1A_3_Eco_Owner_08_01';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_3_4'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4687") != undefined) {
+		var target = 'F1A_3_Eco_Owner_10_02';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnRangeChk(iForm, 2, 1, 100, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_3_10'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("F1A_4-KeyProd") != undefined) {
+		var target = 'F1A_4_KeyProdcut';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_4_1'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("F1A_4-KeyProdCd") != undefined) {
+		var target = 'F1A_4_KeyProdcutCode';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_4_2'],
+				values: new Array()
+			}));
+		}
+	}
+
+	if (document.getElementById("4705") != undefined) {
+		var target = 'F1A_5_Buy';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		$("#4705-0").removeClass("common-error-color");
+		if (!CmnInputChk(iForm, 1, target)) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_5_1'],
+				values: new Array()
+			}));
+			$("#4705-0").addClass("common-error-color");
+		}
+	}
+
 	// Single item input check(1A2)
 	if (questionnaire_id == "1A2") {
 		for (var wk_cnt = 1; wk_cnt <= estb_total; wk_cnt++) {
@@ -993,6 +600,310 @@ function checkController(iForm) {
 
 // Correlation check
 function crossCheckController(iForm, messages) {
+	if (questionnaire_id == "1A") {
+		//Q3. Enterprise's economic ownership
+		var wk_F1A_3_Eco = getFormObject(iForm).elements["F1A_3_Eco_Owner"].value;
+		switch (wk_F1A_3_Eco) {
+			case "03":
+				var wk_central = Number(document.getElementById("4646").value);
+				var wk_local = Number(document.getElementById("4646-1").value);
+				var wk_capital = wk_central + wk_local;
+				var target = 'F1A_3_Eco_Owner_03_01';
+				setBeforeClassName(iForm, target);
+				CmnModClass(iForm, NORMAL_CLASS, target);
+				if (wk_capital <= 50) {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_3_5'],
+						values: new Array()
+					}));
+					$("#4646-1").addClass("common-error-color");
+				}
+				else {
+					if (wk_capital > 100) {
+						messages.push(commonError(iForm, {
+							target: target,
+							errmsg: inputCheckErrorMessage['F1A_3_6'],
+							values: new Array()
+						}));
+						$("#4646-1").addClass("common-error-color");
+					}
+				}
+				break;
+			case "08":
+				var wk_capital = Number(document.getElementById("4647").value);
+				var target = 'F1A_3_Eco_Owner_08_01';
+				setBeforeClassName(iForm, target);
+				CmnModClass(iForm, NORMAL_CLASS, target);
+				if (wk_capital > 50) {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_3_7'],
+						values: new Array()
+					}));
+				}
+				break;
+			case "10":
+				var target = 'F1A_3_Eco_Owner_10_01';
+				setBeforeClassName(iForm, target);
+				CmnModClass(iForm, NORMAL_CLASS, target);
+				$("#4688-0").removeClass("common-error-color");
+				if (!CmnInputChk(iForm, 1, target)) {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_3_8'],
+						values: new Array()
+					}));
+					$("#4688-0").addClass("common-error-color");
+
+				}
+				var target = 'F1A_3_Eco_Owner_10_02';
+				setBeforeClassName(iForm, target);
+				CmnModClass(iForm, NORMAL_CLASS, target);
+				if (!CmnInputChk(iForm, 1, target)) {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_3_9'],
+						values: new Array()
+					}));
+				}
+				break;
+
+		}
+		//Q4.2. Other activity code.
+		for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
+			let wk_F1A_4_Oth = getFormObject(iForm).elements["F1A_4-otherProd_" + i].value;
+			let wk_F1A_4_OthCd = getFormObject(iForm).elements["F1A_4-otherProdCd_" + i].value;
+			var target = 'F1A_4_OtherProdcutCd_' + i;
+			setBeforeClassName(iForm, target);
+			CmnModClass(iForm, NORMAL_CLASS, target);
+			if (wk_F1A_4_Oth != "") {
+				if (!CmnInputChk(iForm, 1, target)) {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_4_4'],
+						values: new Array()
+					}));
+				}
+			}
+			var target = 'F1A_4_OtherProdcut_' + i;
+			setBeforeClassName(iForm, target);
+			CmnModClass(iForm, NORMAL_CLASS, target);
+			if (wk_F1A_4_OthCd != "") {
+				if (!CmnInputChk(iForm, 1, target)) {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_4_3'],
+						values: new Array()
+					}));
+				}
+			}
+
+		}
+
+		//Q6. Total money that enterprise received from...
+		var wk_F1A_5_Buy = getFormObject(iForm).elements["F1A_5_Buy"].value;
+		var target = 'F1A_6_received';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		$("#4709").removeClass("common-error-color");
+		if (wk_F1A_5_Buy == "1") {
+			var wk_F1A_6_1 = Number(document.getElementById("4707").value);
+			var wk_F1A_6_2 = Number(document.getElementById("4709").value);
+			if (wk_F1A_6_1 > 0 || wk_F1A_6_2 > 0) {
+			}
+			else {
+				messages.push(commonError(iForm, {
+					target: target,
+					errmsg: inputCheckErrorMessage['F1A_6_1'],
+					values: new Array()
+				}));
+				$("#4709").addClass("common-error-color");
+			}
+		}
+		//Q7.2 Labour(female).
+		var wk_F1A_7_2_t = Number(document.getElementById("4713").value);
+		var wk_F1A_7_2_f = Number(document.getElementById("4714").value);
+		var target = 'F1A_7_Labour_2';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		$("#4714").removeClass("common-error-color");
+		if (wk_F1A_7_2_t < wk_F1A_7_2_f) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_7_1'],
+				values: new Array()
+			}));
+			$("#4714").addClass("common-error-color");
+		}
+		//Q7.3 Labour as of .
+		var wk_F1A_7_3_t = Number(document.getElementById("5557").value);
+		var wk_F1A_7_3_2 = Number(document.getElementById("5558").value);
+		var wk_F1A_7_3_3 = Number(document.getElementById("5559").value);
+		var wk_F1A_7_3_4 = Number(document.getElementById("5560").value);
+		var wk_F1A_7_3_5 = Number(document.getElementById("5561").value);
+		var target = 'F1A_7_3_Total_1';
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		$("#5558").removeClass("common-error-color");
+		$("#5559").removeClass("common-error-color");
+		$("#5560").removeClass("common-error-color");
+		$("#5561").removeClass("common-error-color");
+		if (wk_F1A_7_3_t < wk_F1A_7_3_2) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_7_2'],
+				values: new Array()
+			}));
+			$("#5558").addClass("common-error-color");
+		}
+		if (wk_F1A_7_3_t < wk_F1A_7_3_3) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_7_3'],
+				values: new Array()
+			}));
+			$("#5559").addClass("common-error-color");
+		}
+		if (wk_F1A_7_3_t < wk_F1A_7_3_4) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_7_4'],
+				values: new Array()
+			}));
+			$("#5560").addClass("common-error-color");
+		}
+		if (wk_F1A_7_3_t < wk_F1A_7_3_5) {
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_7_5'],
+				values: new Array()
+			}));
+			$("#5561").addClass("common-error-color");
+		}
+		if (wk_F1A_3_Eco == "01" || wk_F1A_3_Eco == "02" || wk_F1A_3_Eco == "03" || wk_F1A_3_Eco == "04") {
+			if (wk_F1A_7_3_3 > 0 && wk_F1A_7_3_4 == 0) {
+			}
+			else {
+				target = "F1A_7_3_Total_3";
+				messages.push(commonError(iForm, {
+					target: target,
+					errmsg: inputCheckErrorMessage['F1A_7_6'],
+					values: new Array()
+				}));
+				$("#5560").addClass("common-error-color");
+
+			}
+
+		}
+		//Q7.3 By business production activity...
+		var wk_F1A_7_3_p_num = 0;
+		target = "F1A_7_3_keyActivity_total_1";
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (document.getElementById("F1A_4-KeyProdCd").value !== "") {
+			var wk_F1A_7_3_key = Number(document.getElementById("F1A_7_3_keyActivity_total_1").value);
+			if (wk_F1A_7_3_key > 0) {
+				wk_F1A_7_3_p_num = wk_F1A_7_3_p_num + wk_F1A_7_3_key;
+			}
+			else {
+				messages.push(commonError(iForm, {
+					target: target,
+					errmsg: inputCheckErrorMessage['F1A_7_7'],
+					values: new Array()
+				}));
+			}
+		}
+		for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
+			let wk_F1A_othcd_id = "F1A_4-otherProdCd_" + i;
+			let wk_F1A_oth_id_na = "F1A_7_3_othAct_total_" + i;
+			target = wk_F1A_oth_id_na;
+			setBeforeClassName(iForm, target);
+			CmnModClass(iForm, NORMAL_CLASS, target);
+			if (document.getElementById(wk_F1A_othcd_id).value !== "") {
+				let wk_F1A_7_3_oth = Number(document.getElementById(wk_F1A_oth_id_na).value);
+				if (wk_F1A_7_3_oth > 0) {
+					wk_F1A_7_3_p_num = wk_F1A_7_3_p_num + wk_F1A_7_3_oth;
+				}
+				else {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_7_7'],
+						values: new Array()
+					}));
+				}
+			}
+		}
+		if (wk_F1A_7_3_t < wk_F1A_7_3_p_num) {
+			var target = 'F1A_7_3_Total_1';
+			setBeforeClassName(iForm, target);
+			CmnModClass(iForm, NORMAL_CLASS, target);
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_7_8'],
+				values: new Array()
+			}));
+			$("#F1A_7_3_keyActivity_total_1").addClass("common-error-color");
+			for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
+				let wk_F1A7_oth_id = "#F1A_7_3_othAct_total_" + i;
+				$(wk_F1A7_oth_id).addClass("common-error-color");
+			}
+		}
+		//Q10. Results of business production...
+		var wk_F1A_10_p_num = 0;
+		target = "F1A_10_Results_KeyAct";
+		setBeforeClassName(iForm, target);
+		CmnModClass(iForm, NORMAL_CLASS, target);
+		if (document.getElementById("F1A_4-KeyProdCd").value !== "") {
+			var wk_F1A_10_key = Number(document.getElementById("F1A_10_Results_KeyAct").value);
+			if (wk_F1A_10_key > 0) {
+				wk_F1A_10_p_num = wk_F1A_10_p_num + wk_F1A_10_key;
+			}
+			else {
+				messages.push(commonError(iForm, {
+					target: target,
+					errmsg: inputCheckErrorMessage['F1A_10_1'],
+					values: new Array()
+				}));
+			}
+		}
+		for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
+			let wk_F1A_othcd_id = "F1A_4-otherProdCd_" + i;
+			let wk_F1A_oth_id_na = "F1A_10_Results_othAct_" + i;
+			target = wk_F1A_oth_id_na;
+			setBeforeClassName(iForm, target);
+			CmnModClass(iForm, NORMAL_CLASS, target);
+			if (document.getElementById(wk_F1A_othcd_id).value !== "") {
+				let wk_F1A_10_oth = Number(document.getElementById(wk_F1A_oth_id_na).value);
+				if (wk_F1A_10_oth > 0) {
+					wk_F1A_10_p_num = wk_F1A_10_p_num + wk_F1A_10_oth;
+				}
+				else {
+					messages.push(commonError(iForm, {
+						target: target,
+						errmsg: inputCheckErrorMessage['F1A_10_1'],
+						values: new Array()
+					}));
+				}
+			}
+		}
+		let wk_F1A_10_t = Number(document.getElementById("F1A_10_Results_Total").value);
+		if (wk_F1A_10_t < wk_F1A_10_p_num) {
+			var target = 'F1A_10_Results_Total';
+			setBeforeClassName(iForm, target);
+			CmnModClass(iForm, NORMAL_CLASS, target);
+			messages.push(commonError(iForm, {
+				target: target,
+				errmsg: inputCheckErrorMessage['F1A_10_2'],
+				values: new Array()
+			}));
+			$("#F1A_10_Results_KeyAct").addClass("common-error-color");
+			for (var i = 1; i <= F1A_otherDsp_cnt; i++) {
+				let wk_F1A10_oth_id = "#F1A_10_Results_othAct_" + i;
+				$(wk_F1A10_oth_id).addClass("common-error-color");
+			}
+		}
+	}
 }
 
 
